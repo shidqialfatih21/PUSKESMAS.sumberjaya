@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Puskesmas Sumberjaya - Website Informasi & Layanan</title>
+  <meta name="description" content="Portal informasi dan layanan digital Puskesmas Sumberjaya" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('sumberjaya.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #1f2937;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .header-left div, .header-right div {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .header-left img, .header-right img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 2px solid white;
+      background: white;
+      padding: 4px;
+    }
+
+    .header-center {
+      text-align: center;
+      flex: 1 1 280px;
+    }
+
+    .logo-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .logo-group img {
+      width: 48px;
+      border-radius: 6px;
+    }
+
+    .header-center h1 {
+      margin: 0.25rem 0 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #f9fafb;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .header-center p {
+      margin: 0;
+      color: #d1d5db;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #1e40af;
+      padding: 1rem 0;
+      border-radius: 12px;
+      margin: 1.8rem auto;
+      max-width: 960px;
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.6);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .nav-link {
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+    }
+
+    .nav-link:hover, .nav-link:focus {
+      background-color: #f97316;
+      transform: scale(1.08);
+      outline: 2px solid #fbbf24;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      max-width: 360px;
+      margin: 2rem auto 2.5rem;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      border: 1px solid #cbd5e1;
+      font-size: 1.05rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background-color: white;
+    }
+
+    .search-bar input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Category titles */
+    .category {
+      margin-bottom: 2.2rem;
+    }
+
+    .category h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e40af;
+      border-left: 6px solid #2563eb;
+      padding-left: 0.8rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Grid for apps */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 1rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      border: 1px solid #e2e8f0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card:hover, .card:focus {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      outline: 2px solid #3b82f6;
+      border-color: #3b82f6;
+    }
+
+    .card[aria-disabled="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card div {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #1e293b;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: #6b7280;
+      font-style: italic;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header role="banner">
+    <div class="header-left" aria-label="Foto Ayah dan Kepala Puskesmas">
+      <div>
+        <img src="ayah.jpg" alt="Foto Ayah" loading="lazy" onerror="this.src='https://via.placeholder.com/96?text=Foto+Ayah'" />
+        <img src="kapus.jpg" alt="Foto Kepala Puskesmas" loading="lazy" onerror="this.src='https://via.placeholder.com/96?text=Kapus'" />
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="logo-group" aria-label="Logo Kabupaten dan Dinas Kesehatan">
+        <img src="kabupaten.jpg" alt="Logo Kabupaten" loading="lazy" onerror="this.src='https://via.placeholder.com/48?text=Kab'" />
+        <img src="kesehatan.jpg" alt="Logo Dinas Kesehatan" loading="lazy" onerror="this.src='https://via.placeholder.com/48?text=Kesehatan'" />
+      </div>
+      <h1>Puskesmas Sumberjaya</h1>
+      <p>Website Informasi & Layanan</p>
+    </div>
+
+    <div class="header-right" aria-label="Foto Bupati dan Wakil Bupati">
+      <div>
+        <img src="bupati.jpg" alt="Foto Bupati" loading="lazy" onerror="this.src='https://via.placeholder.com/96?text=Bupati'" />
+        <img src="wakil.jpg" alt="Foto Wakil Bupati" loading="lazy" onerror="this.src='https://via.placeholder.com/96?text=Wakil'" />
+      </div>
+    </div>
+  </header>
+
+  <nav role="navigation" aria-label="Menu utama">
+    <a href="https://puskesmas-digital-compass.lovable.app" target="_blank" class="nav-link" rel="noopener noreferrer">Profil</a>
+    <a href="https://blueprint-web-studio.lovable.app" target="_blank" class="nav-link" rel="noopener noreferrer">Struktur</a>
+    <a href="https://cita-koding-seni.lovable.app" target="_blank" class="nav-link" rel="noopener noreferrer">Astacita</a>
+    <a href="#haki" class="nav-link">HAKI</a>
+  </nav>
+
+  <div class="search-bar">
+    <input type="search" id="search" placeholder="Cari aplikasi..." aria-label="Cari aplikasi" autocomplete="off" />
+  </div>
+
+  <main id="content" tabindex="0" aria-live="polite"></main>
+
+  <script>
+    // Data aplikasi - semua URL telah dibersihkan dari spasi berlebih
+    const data = {
+      "Kesehatan Ibu dan Anak (KIA)": [
+        { name: "MPDN", url: "https://mpdn.kemkes.go.id/masuk", icon: "🤱" },
+        { name: "e-Kohort Bumil", url: "https://ekohort.kemkes.go.id/", icon: "📒" },
+        { name: "SIMATNEO", url: "https://simatneo.com/login.php", icon: "👶" },
+        { name: "PWS KIA", url: "#", icon: "📊" },
+        { name: "MTBS / MTBM", url: "#", icon: "🩺" },
+        { name: "E-kohort Kespro", url: "#", icon: "👩‍⚕️" }
+      ],
+      "Imunisasi": [
+        { name: "KIPI Online", url: "https://keamananvaksin.kemkes.go.id/index.php/public/home", icon: "💉" },
+        { name: "PWS Imunisasi", url: "#", icon: "📈" },
+        { name: "SMILE", url: "https://logistik.smile-indonesia.id/id/login", icon: "😄" },
+        { name: "ASIK Website", url: "https://sehatindonesiaku.kemkes.go.id/auth/login", icon: "🖥" },
+      ],
+      "Gizi": [
+        { name: "SIGIZI Terpadu", url: "https://sigizikesga.kemkes.go.id/login_sisfo/", icon: "🥗" },
+        { name: "Gsheet Kohort GIBUR", url: "#", icon: "📘" },
+        { name: "Gsheet Status Gizi", url: "#", icon: "📊" },
+        { name: "Gsheet Vit A", url: "#", icon: "🧃" },
+        { name: "Gsheet Stunting", url: "#", icon: "📉" },
+        { name: "Gsheet TTD Rematri", url: "#", icon: "💊" }
+      ],
+      "Survailens": [
+        { name: "E-SISMAL", url: "https://sismal.kemkes.go.id/landing", icon: "📡" },
+        { name: "PD3I", url: "http://pd3i.org/", icon: "🦠" },
+        { name: "SKDR", url: "https://skdr.surveilans.org/", icon: "📍" },
+        { name: "E-Filca", url: "#", icon: "🧬" }
+      ],
+      "Penyakit": [
+        { name: "SIHEPI", url: "https://sihepi.kemkes.go.id/login", icon: "🤒" },
+        { name: "SITB", url: "https://sumatera.sitb.id/sitb2024/app", icon: "🧫" },
+        { name: "SILANTOR", url: "https://silantor.kemkes.go.id/", icon: "🦟" },
+        { name: "SIHA", url: "https://sihapims2.kemkes.go.id/login", icon: "🧪" }
+      ],
+      "Indra": [
+        { name: "Si Gangguan Indera", url: "#", icon: "👁️" }
+      ],
+      "Kesling": [
+        { name: "SITBM", url: "#", icon: "🚰" },
+        { name: "SIKELIM", url: "https://staging.sikelimkemkes.id/welcome", icon: "🏞️" },
+        { name: "SITKO", url: "https://sitko.kemkes.go.id/auth/login", icon: "🏚️" }
+      ],
+      "Administrasi & Manajemen": [
+        { name: "SISDMK", url: "https://sdmk.kemkes.go.id/", icon: "📊" },
+        { name: "SIMPEG", url: "#", icon: "👨‍💼" }
+      ],
+      "Farmasi": [
+        { name: "Ketersediaan Obat & Vaksin", url: "#", icon: "💊" },
+        { name: "Sitasia", url: "https://farmalkes.kemkes.go.id/", icon: "📋" },
+        { name: "SIMONA", url: "https://simona.kemkes.go.id/simona_Login/", icon: "📦" },
+        { name: "SIGA", url: "https://siga.bkkbn.go.id/", icon: "📈" }
+      ],
+      "Mutu": [
+        { name: "DFO", url: "https://dfo.kemkes.go.id/Profil", icon: "🗂️" },
+        { name: "ASPAK", url: "https://aspak.kemkes.go.id/aplikasi", icon: "🧰" },
+        { name: "INM", url: "https://mutufasyankes.kemkes.go.id/", icon: "📉" }
+      ],
+      "UKP": [
+        { name: "ASIK Website (CKG)", url: "https://sehatindonesiaku.kemkes.go.id/auth/login", icon: "🧑‍⚕️" }
+      ]
+    };
+
+    // Fungsi membuat kartu
+    function createCard(app) {
+      const disabled = app.url === "#";
+      return `
+        <div class="card" role="button" tabindex="0" aria-disabled="${disabled}"
+             ${disabled ? 'aria-label="' + app.name + ' (tidak tersedia)"' : 'aria-label="Buka ' + app.name + '"'}>
+          <div class="icon" aria-hidden="true">${app.icon}</div>
+          <div>${app.name}${disabled ? ' <span class="text-gray-500 text-xs">(tidak tersedia)</span>' : ''}</div>
+        </div>
+      `;
+    }
+
+    // Render aplikasi
+    function renderApps(filter = "") {
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+
+      let hasResults = false;
+
+      for (const category in data) {
+        const apps = data[category].filter(app =>
+          app.name.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        if (apps.length > 0) {
+          hasResults = true;
+          const section = document.createElement("section");
+          section.className = "category";
+          section.innerHTML = `
+            <h2>${category}</h2>
+            <div class="grid"></div>
+          `;
+          const grid = section.querySelector(".grid");
+          apps.forEach(app => {
+            const card = document.createElement("div");
+            card.innerHTML = createCard(app);
+            const cardEl = card.firstElementChild;
+
+            if (!app.url.startsWith("#")) {
+              cardEl.addEventListener("click", () => {
+                window.open(app.url, '_blank', 'noopener,noreferrer');
+              });
+              cardEl.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                  window.open(app.url, '_blank', 'noopener,noreferrer');
+                }
+              });
+            }
+            grid.appendChild(cardEl);
+          });
+          container.appendChild(section);
+        }
+      }
+
+      if (!hasResults) {
+        container.innerHTML = `<div class="no-results">Tidak ada aplikasi yang ditemukan untuk "<strong>${filter}</strong>"</div>`;
+      }
+    }
+
+    // Event listener pencarian
+    document.getElementById("search").addEventListener("input", e => {
+      renderApps(e.target.value.trim());
+    });
+
+    // Render awal
+    renderApps();
+  </script>
+</body>
+</html>
